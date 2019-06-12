@@ -8,9 +8,13 @@ One of the outputs of refsplitr's authors_clean function is a list of author nam
 
 It. requires the following 3 functions available in this repo.
 
-check_pools
-checks_splits
-df_for_review_check
+```check_pools```
+
+```checks_splits```
+
+```df_for_review_check```
+
+The code is ```code_for_finding_pools_and_splits```
 
 The output of each function is a list. The list includes 5 dataframes built with different
 combinations of names and initials. Thgese dataframes include the entire record, just as it is in
