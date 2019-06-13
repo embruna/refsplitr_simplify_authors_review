@@ -1,5 +1,6 @@
 # refsplitr_streamlining_authors_review
-Code to streamline the review of output from refsplitr's authors_clean function
+
+## Code to streamline the review of output from refsplitr's ```authors_clean()``` function
 
 
 
@@ -48,8 +49,8 @@ To use these tools you need the following files from this repository:
 
 
 
-
->**Example of the ```check_splits()``` output for different name/initial combinations.**
+***
+**Example of the ```check_splits()``` output for different name/initial combinations.**
 
 1) The following would be the output in the (highly unlikley) scenario that a dataset included the following 5 authors with very similar names and in which one of them was incorrectly split into two groupIDs:  
 
