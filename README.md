@@ -5,18 +5,18 @@ Becuase there is always some unceartainty in these assignments (e.g., is Emilio 
 
 It does so with functious that use different combinatons of author names and initials to check for cases where:
 
-   1) the same author appears to have been incorrectly split into >1 groupID numbers
-   2) different authors appears to have been incorrectly pooled under the same groupID
+   - the same author appears to have been incorrectly split into >1 groupID numbers
+   - different authors appears to have been incorrectly pooled under the same groupID
 
-To use these tools you need the following 3 functions:
+To use these tools you need the following files from this repository:
 
-```check_pools.R```
+   - function ```check_pools.R```
 
-```checks_splits.R```
+   - function ```checks_splits.R```
 
-```df_for_review_check.R```
+   - function ```df_for_review_check.R```
 
-You can then run the analyses with the code in the R script ```code_for_finding_pools_and_splits.R```.
+   - R script ```code_for_finding_pools_and_splits.R```.
 
 **Instructions**
 
