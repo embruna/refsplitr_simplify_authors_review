@@ -60,17 +60,17 @@ To use these tools you need the following files from this repository:
    - Bruna, Enrique M. (assigned to group=45)
    - Bruna, Jorge C. (assigned to group=45).
 
-  ```check_splits_list$AF```: returns Bruna, Emilio M. (groupID=21) and Bruna, Emilio M. (groupID=34) 
+    ```check_splits_list$AF```: returns Bruna, Emilio M. (groupID=21) and Bruna, Emilio M. (groupID=34) 
   
-  ```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Enrique M. (group=45).
+    ```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Enrique M. (group=45).
   
-  ```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564) 
+    ```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564) 
   
-  ```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), Bruna, Emilio R. (groupID=564), and Bruna, Enrique M. (group=45).
+    ```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), Bruna, Emilio R. (groupID=564), and Bruna, Enrique M. (group=45).
   
-  ```check_splits_list$Last```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564), Bruna, Enrique M. (group=45), and Bruna, Jorge C. (group=45).
+    ```check_splits_list$Last```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564), Bruna, Enrique M. (group=45), and Bruna, Jorge C. (group=45).
 
-The less stringent name/initial combinations did not reveal any additional cases where the same author was incoreectly split into different groupIDs. ***This will usually be the case.*** 
+    The less stringent name/initial combinations did not reveal any additional cases where the same author was incoreectly split into different groupIDs. ***This will usually be the case.*** 
 
 2) An example where ```check_splits_list$AF``` wouldn't return the different groupIDs for an incorrectly split authoris the following (highly unlikely) situation: 
 
@@ -78,14 +78,14 @@ The less stringent name/initial combinations did not reveal any additional cases
    - Bruna, E M (same person but incorrectly assigned to groupID=98 instead of groupID=21)
    - Bruna, Emilio (same person but incorrectly assigned to groupID=852 instead of groupID=21)
 
-  ```check_splits_list$AF```: none returned  
+    ```check_splits_list$AF```: none returned  
   
-  ```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21) and Bruna,  E M (groupID=98)
+    ```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21) and Bruna,  E M (groupID=98)
   
-  ```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio (groupID=852)
+    ```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio (groupID=852)
   
-  ```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, E M (groupID=98), Bruna, Emilio (groupID=852).
+    ```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, E M (groupID=98), Bruna, Emilio (groupID=852).
 
-In this case only the least stringent combination included all three name variants used by the author AND not identified as refsplitr as the same author using the other criteria in the record (ORCIDID, email, address, etc.) ***Cases such as these are likely extremely rare***, but we provide these outputs to allow users to search for them anyway. 
+    In this case only the least stringent combination included all three name variants used by the author AND not identified as refsplitr as the same author using the other criteria in the record (ORCIDID, email, address, etc.) ***Cases such as these are likely extremely rare***, but we provide these outputs to allow users to search for them anyway. 
 
 
