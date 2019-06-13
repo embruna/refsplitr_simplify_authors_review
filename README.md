@@ -1,10 +1,10 @@
 # refsplitr_streamlining_authors_review
 
-## Code to streamline the review of output from [https://github.com/embruna/refsplitr](refsplitr)'s ```authors_clean()``` function
+## Code to streamline the review of output from [refsplitr's](https://github.com/embruna/refsplitr) ```authors_clean()``` function
 
 
 
-Becuase there is always some unceartainty in disambiguation (e.g., is Emilio Bruna *really* the same person as E. Bruna?) [https://github.com/embruna/refsplitr](refsplitr) flags and provides the opportunity to review a subset of groupID assignments and make any necessary corrections: the ```authors$review``` output of the ```authors_clean()``` function is a dataframe with the complete records for author name variants that refsplitr has assigned to the same groupID. Most of these will be correctly assigned, but because the dataframe of name variants to review gets larger as the number of references (and hence authors) gets larger it can eventually become quite daunting. This repository is code to simplify the process of reviewing the ```authors$review``` dataframe by dividing it into more manageable subgroups. It does so with functious that use different combinatons of author names and initials to check for cases where:
+Becuase there is always some unceartainty in disambiguation -- is Emilio Bruna *really* the same person as E. Bruna? -- [refsplitr](https://github.com/embruna/refsplitr) flags a subset of groupID assignments for review so users can make any necessary corrections: the ```authors$review``` output of the ```authors_clean()``` function is a dataframe with the complete records for author name variants that refsplitr has assigned to the same groupID. Most of these will be correctly assigned, but because the dataframe of name variants to review gets larger as the number of references (and hence authors) gets larger it can eventually become quite daunting. This repository is code to simplify the process of reviewing the ```authors$review``` dataframe by dividing it into more manageable subgroups. It does so with functious that use different combinatons of author names and initials to check for cases where:
 
    1) the same author appears to have been incorrectly split into >1 groupID numbers
    
