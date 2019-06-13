@@ -1,34 +1,73 @@
 # refsplitr_streamlining_authors_review
 Code to streamline the review of output from refsplitr's authors_clean function
 
-One of the outputs of refsplitr's authors_clean function is a list of author name variants to review and verify have been assigned to the coreect groupID. This list gets larger as the number of references (and hence authors) gets larger. Most of these will be correctly assigned, but it can still be quite daunting. This code helps simplifyt the review process by checking for:
+Becuase there is always some unceartainty in these assignments (e.g., is Emilio Bruna *really* the same person as E. Bruna?) refsplitr provides the opportunity to review these assignments and make any necessary corrections to the groupID assignments: the ```authors$review``` output of the ```authors_clean()``` function is a dataframe with the complete records for author name variants that refsplitr has assigned to the same groupID. Most of these will be correctly assigned, but because the dataframe of name variants to review gets larger as the number of references (and hence authors) gets larger it can eventually become quite daunting. This repository is code to simplify the process of reviewing the ```authors$review``` dataframe by dividing it into more manageable subgroups. 
 
-1) the same author being incorrectly split into >1 groupID
-2) different authors being incorrectly pooled into the same groupID
+It does so with functious that use different combinatons of author names and initials to check for cases where:
 
-It. requires the following 3 functions available in this repo.
+1) the same author appears to have been incorrectly split into >1 groupID numbers
+2) different authors appears to have been incorrectly pooled under the same groupID
 
-```check_pools```
+To use these tools you need the following 3 functions:
 
-```checks_splits```
+```check_pools.R```
 
-```df_for_review_check```
+```checks_splits.R```
 
-The code is ```code_for_finding_pools_and_splits```
+```df_for_review_check.R```
 
-The output of each function is a list. The list includes 5 dataframes built with different
-combinations of names and initials. Thgese dataframes include the entire record, just as it is in
-authors_review and authors_prelim.  The list also includes a summary of each dataframe, where you
-can see an overview of the different names, how many name/initial combinations are pooled/split
-into each groupID, and the number of records for each name name/initial combination
 
-A few suggestions:
+You can then run the analyses with the code in the R script ```code_for_finding_pools_and_splits.R```.
 
-1) Checking for Incorrectly Split Authors (i.e., same person, different GroupID):
-start with check_splits_list$AF_summary and check_splits_list$AF. These records are records of
-authors with identical names in the WOS AF column that have been assigned different groupIDs.
-THESE WILL ALMOST CERTAINLY HAVE TO BE CORRECTED. You may find a few more by looking over
-check_splits_list$Last_FM and check_splits_list$Last_First, but only rarely.
+**Instructions**
+
+1) put the functions in your Rstudio project or working directory. 
+
+2) After executing the ```authors_clean()``` function, execute the code in ```code_for_finding_pools_and_splits.R```. Be sure to modify the ```source("check_splits.R")``` as needed ```source("check_pools.R")``` if the functions are located somewhere other than the working directory or the same folder as your Rstudio project. (for example, if you create a folder called "functions" in your RStudio project you would modify as follows ```source("./functions/check_splits.R")```.
+
+3) The output of ```checks_splits.R``` and ```"check_pools.R"``` are lists. Each list includes 5 dataframes built with different combinations of last names and first/middle last names and initials. These dataframes include the entire record for each author, just as it is in ```authors$review``` and ```authors$prelim```.  The lists also include summary tables of each dataframe, which provide an overview of the different names pooled in a single groupID (or different groupIDs intto which a single name has been split), how many name/initial combinations are pooled/split into each groupID, and the number of author records for each name/initial combination. The different output of these functions will include more or fewer names as the combinations of names and initials becomes more or less stringent. These are the combinations, from (approximately) most to least stringent: 
+
+```$AF```: name as in the AF column of the Web of Science record
+```$Last_FM```: Last Name, First Initial and Middle Initial
+```$Last_First```: Last Name, First Name
+```$Last_F```: Last Name, First Initial
+```$Last```: Last Name
+
+It is is possible no name/initial combinations will have the same (or different) groupID numbers.
+
+4) Suggestions
+
+*4.1) Checking for Incorrectly Split Authors (i.e., the same person incorrectly assigned to >1 groupID):*
+
+Start with ```check_splits_list$AF_summary```  and ```check_splits_list$AF``` . These are records of authors with identical names in the Web of Science AF column that have been assigned different groupIDs. Our tests indicate this is very unlikley unless there are >5000 authors in the dataset, and even then the number of authors incorrectly split is extremely small (e.g., ~15 people in a test dataset with over 50,000 authors). However, there will almost certainly be a few of these in such larger datasets because of the way that resplitr's disambiguation makes decisions about groupings. People with identical names split into different groupIDs can be seen in ```check_splits_list$Last_FM``` and ``` check_splits_list$Last_First``` (though note it is possible these are actually different authors with identical names). 
+
+The remaining dataframes are increasingly less stringent, and so will include name/initial combinations that are in fact different authors. For instance the following would be the output in the (highly unlikley) scenario that a dataset included the following 5 authors with very similar names and in which one of them was incorrectly split into two groupIDs:  
+
+Bruna, Emilio M. (assigned to groupID=21)
+Bruna, Emilio M. (same person but incorrectly assigned to groupID=34 instead of groupID=21)
+Bruna, Emilio R. (assigned to groupID=564)
+Bruna, Enrique M. (assigned to group=45)
+Bruna, Jorge C. (assigned to group=45).
+
+```check_splits_list$AF```: returns Bruna, Emilio M. (groupID=21) and Bruna, Emilio M. (groupID=34) 
+```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Enrique M. (group=45).
+```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564) 
+```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), Bruna, Emilio R. (groupID=564), and Bruna, Enrique M. (group=45).
+```check_splits_list$Last```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio M. (groupID=34), and Bruna, Emilio R. (groupID=564), Bruna, Enrique M. (group=45), and Bruna, Jorge C. (group=45).
+
+The less stringent name/initial combinations did not reveal any additional cases where the same author was incoreectly split into different groupIDs. ***This will usually be the case.*** . The exception would be a (highly unlikely) situation such as this: 
+
+Bruna, Emilio M. (groupID=21)
+Bruna, E M (same person but incorrectly assigned to groupID=98 instead of groupID=21)
+Bruna, Emilio (same person but incorrectly assigned to groupID=852 instead of groupID=21)
+
+```check_splits_list$AF```: none returned  
+```check_splits_list$Last_FM```: returns Bruna, Emilio M. (groupID=21) and Bruna,  E M (groupID=98)
+```check_splits_list$Last_First```: returns Bruna, Emilio M. (groupID=21), Bruna, Emilio (groupID=852)
+```check_splits_list$Last_F```: returns Bruna, Emilio M. (groupID=21), Bruna, E M (groupID=98), Bruna, Emilio (groupID=852).
+
+In this case only the least stringent combination included all three name variants used by the author AND not identified as refsplitr as the same author using the other criteria in the record (ORCIDID, email, address, etc.) ***Cases such as these are likely extremely rare***, but we provide these outputs to allow users to search for them anyway. 
+
 
 2) Checking for Incorrectly Pooled Authors (i.e., different person, same groupID):
 GENERALLY SPEAKING WE HAVE FOUND THIS TYPE OF ERROR IS EXTREMELY RARE. Most of the cases on the
